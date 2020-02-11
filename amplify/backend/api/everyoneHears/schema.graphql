@@ -1,7 +1,76 @@
-type Person @model {
-	id: ID!
-	title: String!
-	content: String!
-	price: Int
-	rating: Float
+type Light @model {
+  id: ID!
+  name: String!
+  numberOfParticipants: Int!
+  numberOfCards: Int!
+  people: [Person]! @connection(name: "lightPeople")
+  neighbors: [LightsAndNeighbors]!
+    @connection(keyName: "byLight", fields: ["id"])
+}
+
+type Person
+  @model
+  # @key(name: "byPhone", fields: ["phone"], queryField: "peopleByPhone")
+  # @key(
+  #   name: "byName"
+  #   fields: ["id", "firstName", "lastName"]
+  #   queryField: "personByName"
+  # ) 
+	{
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phone: String
+  everyoneHears: YesNo!
+  smsPrayerCard: YesNo!
+  light: Light @connection(name: "lightPeople")
+}
+
+type Neighbor @model {
+  id: ID!
+  location: Location!
+  firstName: String!
+  lastName: String!
+  secondName: String
+  sex: Sex!
+  maritalStatus: Boolean!
+  childrenPresent: Boolean!
+  houseSize: Int!
+  incomeMin: Int
+  incomeMax: Int
+  ageMin: Int
+  ageMax: Int
+  resLengthMin: Int
+  resLengthMax: Int
+  lights: [LightsAndNeighbors]!
+    @connection(keyName: "byNeighbor", fields: ["id"])
+}
+
+type LightsAndNeighbors
+  @model(queries: null)
+  @key(name: "byLight", fields: ["lightID", "neighborID"])
+  @key(name: "byNeighbor", fields: ["neighborID", "lightID"]) {
+  id: ID!
+  lightID: ID!
+  neighborID: ID!
+  light: Light! @connection(fields: ["lightID"])
+  neighbor: Neighbor! @connection(fields: ["neighborID"])
+}
+
+type Location {
+  number: Int!
+  street: String!
+  lat: Float
+  lon: Float
+}
+
+enum Sex {
+  Male
+  Female
+  Unknown
+}
+
+enum YesNo {
+  yes
+  no
 }
