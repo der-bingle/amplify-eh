@@ -4,15 +4,12 @@ type Light @model {
   numberOfParticipants: Int!
   numberOfCards: Int!
   people: [Person]! @connection(name: "lightPeople")
-  neighbors: [LightsAndNeighbors]!
-    @connection(keyName: "byLight", fields: ["id"])
-  weeksByNumber: [Week] @connection(keyName: "byLightByWeek", fields: ["id"])
-  weeksByDate: [Week] @connection(keyName: "byLightByDate", fields: ["id"])
+  neighbors: [LightsAndNeighbors]! @connection(keyName: "byLight", fields: ["id"])
   weeks: [Week] @connection(keyName: "byLight", fields: ["id"])
 }
 
 type Person
-  @model
+  @model(queries: { get: "getPerson", list: "listPeople" })
   @key(name: "byPhone", fields: ["phone", "id"], queryField: "peopleByPhone") 
   @key(name: "byName", fields: ["lastName","firstName"], queryField: "peopleByName")
   {
@@ -41,8 +38,7 @@ type Neighbor @model {
   ageMax: Int
   resLengthMin: Int
   resLengthMax: Int
-  lights: [LightsAndNeighbors]!
-    @connection(keyName: "byNeighbor", fields: ["id"])
+  lights: [LightsAndNeighbors]! @connection(keyName: "byNeighbor", fields: ["id"])
   weeks: [WeeksAndNeighbors]! @connection(keyName: "byNeighbor", fields: ["id"])
   prayerCount: Int!
 }
@@ -71,8 +67,8 @@ type WeeksAndNeighbors
 
 type Week
   @model
-  @key(name: "byLightByWeek", fields: ["lightID", "ehNumber"])
-  @key(name: "byLightByDate", fields: ["lightID", "startDate"])
+  @key(name: "byLight", fields: ["lightID"])
+  @key(name: "byLightbyDate", fields: ["lightID", "startDate"], queryField: "weeksByLightByDate") 
   {
   id: ID!
   ehNumber: Int!
