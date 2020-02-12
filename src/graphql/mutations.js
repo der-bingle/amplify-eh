@@ -30,6 +30,15 @@ export const createLight = /* GraphQL */ `
         }
         nextToken
       }
+      weeks {
+        items {
+          id
+          ehNumber
+          startDate
+          lightID
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -59,6 +68,15 @@ export const updateLight = /* GraphQL */ `
           id
           lightID
           neighborID
+        }
+        nextToken
+      }
+      weeks {
+        items {
+          id
+          ehNumber
+          startDate
+          lightID
         }
         nextToken
       }
@@ -94,6 +112,15 @@ export const deleteLight = /* GraphQL */ `
         }
         nextToken
       }
+      weeks {
+        items {
+          id
+          ehNumber
+          startDate
+          lightID
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -118,6 +145,9 @@ export const createPerson = /* GraphQL */ `
           nextToken
         }
         neighbors {
+          nextToken
+        }
+        weeks {
           nextToken
         }
       }
@@ -147,6 +177,9 @@ export const updatePerson = /* GraphQL */ `
         neighbors {
           nextToken
         }
+        weeks {
+          nextToken
+        }
       }
     }
   }
@@ -172,6 +205,9 @@ export const deletePerson = /* GraphQL */ `
           nextToken
         }
         neighbors {
+          nextToken
+        }
+        weeks {
           nextToken
         }
       }
@@ -212,6 +248,15 @@ export const createNeighbor = /* GraphQL */ `
         }
         nextToken
       }
+      weeks {
+        items {
+          id
+          weekID
+          neighborID
+        }
+        nextToken
+      }
+      prayerCount
     }
   }
 `;
@@ -249,6 +294,15 @@ export const updateNeighbor = /* GraphQL */ `
         }
         nextToken
       }
+      weeks {
+        items {
+          id
+          weekID
+          neighborID
+        }
+        nextToken
+      }
+      prayerCount
     }
   }
 `;
@@ -286,6 +340,15 @@ export const deleteNeighbor = /* GraphQL */ `
         }
         nextToken
       }
+      weeks {
+        items {
+          id
+          weekID
+          neighborID
+        }
+        nextToken
+      }
+      prayerCount
     }
   }
 `;
@@ -307,6 +370,9 @@ export const createLightsAndNeighbors = /* GraphQL */ `
           nextToken
         }
         neighbors {
+          nextToken
+        }
+        weeks {
           nextToken
         }
       }
@@ -334,6 +400,10 @@ export const createLightsAndNeighbors = /* GraphQL */ `
         lights {
           nextToken
         }
+        weeks {
+          nextToken
+        }
+        prayerCount
       }
     }
   }
@@ -358,6 +428,9 @@ export const updateLightsAndNeighbors = /* GraphQL */ `
         neighbors {
           nextToken
         }
+        weeks {
+          nextToken
+        }
       }
       neighbor {
         id
@@ -383,6 +456,10 @@ export const updateLightsAndNeighbors = /* GraphQL */ `
         lights {
           nextToken
         }
+        weeks {
+          nextToken
+        }
+        prayerCount
       }
     }
   }
@@ -403,6 +480,65 @@ export const deleteLightsAndNeighbors = /* GraphQL */ `
         numberOfCards
         people {
           nextToken
+        }
+        neighbors {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+      }
+      neighbor {
+        id
+        location {
+          number
+          street
+          lat
+          lon
+        }
+        firstName
+        lastName
+        secondName
+        sex
+        maritalStatus
+        childrenPresent
+        houseSize
+        incomeMin
+        incomeMax
+        ageMin
+        ageMax
+        resLengthMin
+        resLengthMax
+        lights {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+        prayerCount
+      }
+    }
+  }
+`;
+export const createWeeksAndNeighbors = /* GraphQL */ `
+  mutation CreateWeeksAndNeighbors(
+    $input: CreateWeeksAndNeighborsInput!
+    $condition: ModelWeeksAndNeighborsConditionInput
+  ) {
+    createWeeksAndNeighbors(input: $input, condition: $condition) {
+      id
+      weekID
+      neighborID
+      week {
+        id
+        ehNumber
+        startDate
+        lightID
+        light {
+          id
+          name
+          numberOfParticipants
+          numberOfCards
         }
         neighbors {
           nextToken
@@ -432,6 +568,230 @@ export const deleteLightsAndNeighbors = /* GraphQL */ `
         lights {
           nextToken
         }
+        weeks {
+          nextToken
+        }
+        prayerCount
+      }
+    }
+  }
+`;
+export const updateWeeksAndNeighbors = /* GraphQL */ `
+  mutation UpdateWeeksAndNeighbors(
+    $input: UpdateWeeksAndNeighborsInput!
+    $condition: ModelWeeksAndNeighborsConditionInput
+  ) {
+    updateWeeksAndNeighbors(input: $input, condition: $condition) {
+      id
+      weekID
+      neighborID
+      week {
+        id
+        ehNumber
+        startDate
+        lightID
+        light {
+          id
+          name
+          numberOfParticipants
+          numberOfCards
+        }
+        neighbors {
+          nextToken
+        }
+      }
+      neighbor {
+        id
+        location {
+          number
+          street
+          lat
+          lon
+        }
+        firstName
+        lastName
+        secondName
+        sex
+        maritalStatus
+        childrenPresent
+        houseSize
+        incomeMin
+        incomeMax
+        ageMin
+        ageMax
+        resLengthMin
+        resLengthMax
+        lights {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+        prayerCount
+      }
+    }
+  }
+`;
+export const deleteWeeksAndNeighbors = /* GraphQL */ `
+  mutation DeleteWeeksAndNeighbors(
+    $input: DeleteWeeksAndNeighborsInput!
+    $condition: ModelWeeksAndNeighborsConditionInput
+  ) {
+    deleteWeeksAndNeighbors(input: $input, condition: $condition) {
+      id
+      weekID
+      neighborID
+      week {
+        id
+        ehNumber
+        startDate
+        lightID
+        light {
+          id
+          name
+          numberOfParticipants
+          numberOfCards
+        }
+        neighbors {
+          nextToken
+        }
+      }
+      neighbor {
+        id
+        location {
+          number
+          street
+          lat
+          lon
+        }
+        firstName
+        lastName
+        secondName
+        sex
+        maritalStatus
+        childrenPresent
+        houseSize
+        incomeMin
+        incomeMax
+        ageMin
+        ageMax
+        resLengthMin
+        resLengthMax
+        lights {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+        prayerCount
+      }
+    }
+  }
+`;
+export const createWeek = /* GraphQL */ `
+  mutation CreateWeek(
+    $input: CreateWeekInput!
+    $condition: ModelWeekConditionInput
+  ) {
+    createWeek(input: $input, condition: $condition) {
+      id
+      ehNumber
+      startDate
+      lightID
+      light {
+        id
+        name
+        numberOfParticipants
+        numberOfCards
+        people {
+          nextToken
+        }
+        neighbors {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+      }
+      neighbors {
+        items {
+          id
+          weekID
+          neighborID
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateWeek = /* GraphQL */ `
+  mutation UpdateWeek(
+    $input: UpdateWeekInput!
+    $condition: ModelWeekConditionInput
+  ) {
+    updateWeek(input: $input, condition: $condition) {
+      id
+      ehNumber
+      startDate
+      lightID
+      light {
+        id
+        name
+        numberOfParticipants
+        numberOfCards
+        people {
+          nextToken
+        }
+        neighbors {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+      }
+      neighbors {
+        items {
+          id
+          weekID
+          neighborID
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteWeek = /* GraphQL */ `
+  mutation DeleteWeek(
+    $input: DeleteWeekInput!
+    $condition: ModelWeekConditionInput
+  ) {
+    deleteWeek(input: $input, condition: $condition) {
+      id
+      ehNumber
+      startDate
+      lightID
+      light {
+        id
+        name
+        numberOfParticipants
+        numberOfCards
+        people {
+          nextToken
+        }
+        neighbors {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+      }
+      neighbors {
+        items {
+          id
+          weekID
+          neighborID
+        }
+        nextToken
       }
     }
   }

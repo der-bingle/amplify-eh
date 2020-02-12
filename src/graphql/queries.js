@@ -27,6 +27,15 @@ export const getLight = /* GraphQL */ `
         }
         nextToken
       }
+      weeks {
+        items {
+          id
+          ehNumber
+          startDate
+          lightID
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -46,6 +55,9 @@ export const listLights = /* GraphQL */ `
           nextToken
         }
         neighbors {
+          nextToken
+        }
+        weeks {
           nextToken
         }
       }
@@ -71,6 +83,9 @@ export const getPerson = /* GraphQL */ `
           nextToken
         }
         neighbors {
+          nextToken
+        }
+        weeks {
           nextToken
         }
       }
@@ -133,6 +148,15 @@ export const getNeighbor = /* GraphQL */ `
         }
         nextToken
       }
+      weeks {
+        items {
+          id
+          weekID
+          neighborID
+        }
+        nextToken
+      }
+      prayerCount
     }
   }
 `;
@@ -165,6 +189,69 @@ export const listNeighbors = /* GraphQL */ `
         resLengthMin
         resLengthMax
         lights {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+        prayerCount
+      }
+      nextToken
+    }
+  }
+`;
+export const getWeek = /* GraphQL */ `
+  query GetWeek($id: ID!) {
+    getWeek(id: $id) {
+      id
+      ehNumber
+      startDate
+      lightID
+      light {
+        id
+        name
+        numberOfParticipants
+        numberOfCards
+        people {
+          nextToken
+        }
+        neighbors {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+      }
+      neighbors {
+        items {
+          id
+          weekID
+          neighborID
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listWeeks = /* GraphQL */ `
+  query ListWeeks(
+    $filter: ModelWeekFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listWeeks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        ehNumber
+        startDate
+        lightID
+        light {
+          id
+          name
+          numberOfParticipants
+          numberOfCards
+        }
+        neighbors {
           nextToken
         }
       }

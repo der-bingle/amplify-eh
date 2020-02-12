@@ -27,6 +27,15 @@ export const onCreateLight = /* GraphQL */ `
         }
         nextToken
       }
+      weeks {
+        items {
+          id
+          ehNumber
+          startDate
+          lightID
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -53,6 +62,15 @@ export const onUpdateLight = /* GraphQL */ `
           id
           lightID
           neighborID
+        }
+        nextToken
+      }
+      weeks {
+        items {
+          id
+          ehNumber
+          startDate
+          lightID
         }
         nextToken
       }
@@ -85,6 +103,15 @@ export const onDeleteLight = /* GraphQL */ `
         }
         nextToken
       }
+      weeks {
+        items {
+          id
+          ehNumber
+          startDate
+          lightID
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -106,6 +133,9 @@ export const onCreatePerson = /* GraphQL */ `
           nextToken
         }
         neighbors {
+          nextToken
+        }
+        weeks {
           nextToken
         }
       }
@@ -132,6 +162,9 @@ export const onUpdatePerson = /* GraphQL */ `
         neighbors {
           nextToken
         }
+        weeks {
+          nextToken
+        }
       }
     }
   }
@@ -154,6 +187,9 @@ export const onDeletePerson = /* GraphQL */ `
           nextToken
         }
         neighbors {
+          nextToken
+        }
+        weeks {
           nextToken
         }
       }
@@ -191,6 +227,15 @@ export const onCreateNeighbor = /* GraphQL */ `
         }
         nextToken
       }
+      weeks {
+        items {
+          id
+          weekID
+          neighborID
+        }
+        nextToken
+      }
+      prayerCount
     }
   }
 `;
@@ -225,6 +270,15 @@ export const onUpdateNeighbor = /* GraphQL */ `
         }
         nextToken
       }
+      weeks {
+        items {
+          id
+          weekID
+          neighborID
+        }
+        nextToken
+      }
+      prayerCount
     }
   }
 `;
@@ -259,6 +313,15 @@ export const onDeleteNeighbor = /* GraphQL */ `
         }
         nextToken
       }
+      weeks {
+        items {
+          id
+          weekID
+          neighborID
+        }
+        nextToken
+      }
+      prayerCount
     }
   }
 `;
@@ -277,6 +340,9 @@ export const onCreateLightsAndNeighbors = /* GraphQL */ `
           nextToken
         }
         neighbors {
+          nextToken
+        }
+        weeks {
           nextToken
         }
       }
@@ -304,6 +370,10 @@ export const onCreateLightsAndNeighbors = /* GraphQL */ `
         lights {
           nextToken
         }
+        weeks {
+          nextToken
+        }
+        prayerCount
       }
     }
   }
@@ -325,6 +395,9 @@ export const onUpdateLightsAndNeighbors = /* GraphQL */ `
         neighbors {
           nextToken
         }
+        weeks {
+          nextToken
+        }
       }
       neighbor {
         id
@@ -350,6 +423,10 @@ export const onUpdateLightsAndNeighbors = /* GraphQL */ `
         lights {
           nextToken
         }
+        weeks {
+          nextToken
+        }
+        prayerCount
       }
     }
   }
@@ -367,6 +444,62 @@ export const onDeleteLightsAndNeighbors = /* GraphQL */ `
         numberOfCards
         people {
           nextToken
+        }
+        neighbors {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+      }
+      neighbor {
+        id
+        location {
+          number
+          street
+          lat
+          lon
+        }
+        firstName
+        lastName
+        secondName
+        sex
+        maritalStatus
+        childrenPresent
+        houseSize
+        incomeMin
+        incomeMax
+        ageMin
+        ageMax
+        resLengthMin
+        resLengthMax
+        lights {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+        prayerCount
+      }
+    }
+  }
+`;
+export const onCreateWeeksAndNeighbors = /* GraphQL */ `
+  subscription OnCreateWeeksAndNeighbors {
+    onCreateWeeksAndNeighbors {
+      id
+      weekID
+      neighborID
+      week {
+        id
+        ehNumber
+        startDate
+        lightID
+        light {
+          id
+          name
+          numberOfParticipants
+          numberOfCards
         }
         neighbors {
           nextToken
@@ -396,6 +529,215 @@ export const onDeleteLightsAndNeighbors = /* GraphQL */ `
         lights {
           nextToken
         }
+        weeks {
+          nextToken
+        }
+        prayerCount
+      }
+    }
+  }
+`;
+export const onUpdateWeeksAndNeighbors = /* GraphQL */ `
+  subscription OnUpdateWeeksAndNeighbors {
+    onUpdateWeeksAndNeighbors {
+      id
+      weekID
+      neighborID
+      week {
+        id
+        ehNumber
+        startDate
+        lightID
+        light {
+          id
+          name
+          numberOfParticipants
+          numberOfCards
+        }
+        neighbors {
+          nextToken
+        }
+      }
+      neighbor {
+        id
+        location {
+          number
+          street
+          lat
+          lon
+        }
+        firstName
+        lastName
+        secondName
+        sex
+        maritalStatus
+        childrenPresent
+        houseSize
+        incomeMin
+        incomeMax
+        ageMin
+        ageMax
+        resLengthMin
+        resLengthMax
+        lights {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+        prayerCount
+      }
+    }
+  }
+`;
+export const onDeleteWeeksAndNeighbors = /* GraphQL */ `
+  subscription OnDeleteWeeksAndNeighbors {
+    onDeleteWeeksAndNeighbors {
+      id
+      weekID
+      neighborID
+      week {
+        id
+        ehNumber
+        startDate
+        lightID
+        light {
+          id
+          name
+          numberOfParticipants
+          numberOfCards
+        }
+        neighbors {
+          nextToken
+        }
+      }
+      neighbor {
+        id
+        location {
+          number
+          street
+          lat
+          lon
+        }
+        firstName
+        lastName
+        secondName
+        sex
+        maritalStatus
+        childrenPresent
+        houseSize
+        incomeMin
+        incomeMax
+        ageMin
+        ageMax
+        resLengthMin
+        resLengthMax
+        lights {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+        prayerCount
+      }
+    }
+  }
+`;
+export const onCreateWeek = /* GraphQL */ `
+  subscription OnCreateWeek {
+    onCreateWeek {
+      id
+      ehNumber
+      startDate
+      lightID
+      light {
+        id
+        name
+        numberOfParticipants
+        numberOfCards
+        people {
+          nextToken
+        }
+        neighbors {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+      }
+      neighbors {
+        items {
+          id
+          weekID
+          neighborID
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateWeek = /* GraphQL */ `
+  subscription OnUpdateWeek {
+    onUpdateWeek {
+      id
+      ehNumber
+      startDate
+      lightID
+      light {
+        id
+        name
+        numberOfParticipants
+        numberOfCards
+        people {
+          nextToken
+        }
+        neighbors {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+      }
+      neighbors {
+        items {
+          id
+          weekID
+          neighborID
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteWeek = /* GraphQL */ `
+  subscription OnDeleteWeek {
+    onDeleteWeek {
+      id
+      ehNumber
+      startDate
+      lightID
+      light {
+        id
+        name
+        numberOfParticipants
+        numberOfCards
+        people {
+          nextToken
+        }
+        neighbors {
+          nextToken
+        }
+        weeks {
+          nextToken
+        }
+      }
+      neighbors {
+        items {
+          id
+          weekID
+          neighborID
+        }
+        nextToken
       }
     }
   }
