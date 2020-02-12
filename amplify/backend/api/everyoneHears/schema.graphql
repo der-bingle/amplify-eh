@@ -6,10 +6,16 @@ type Light @model {
   people: [Person]! @connection(name: "lightPeople")
   neighbors: [LightsAndNeighbors]!
     @connection(keyName: "byLight", fields: ["id"])
+  weeksByNumber: [Week] @connection(keyName: "byLightByWeek", fields: ["id"])
+  weeksByDate: [Week] @connection(keyName: "byLightByDate", fields: ["id"])
   weeks: [Week] @connection(keyName: "byLight", fields: ["id"])
 }
 
-type Person @model {
+type Person
+  @model
+  @key(name: "byPhone", fields: ["phone", "id"], queryField: "peopleByPhone") 
+  @key(name: "byName", fields: ["lastName","firstName"], queryField: "peopleByName")
+  {
   id: ID!
   firstName: String!
   lastName: String!
@@ -63,14 +69,18 @@ type WeeksAndNeighbors
   neighbor: Neighbor! @connection(fields: ["neighborID"])
 }
 
-type Week @model @key(name: "byLight", fields: ["lightID", "startDate"]) {
+type Week
+  @model
+  @key(name: "byLightByWeek", fields: ["lightID", "ehNumber"])
+  @key(name: "byLightByDate", fields: ["lightID", "startDate"])
+  {
   id: ID!
   ehNumber: Int!
   startDate: String!
   lightID: ID!
   light: Light @connection(fields: ["lightID"])
   neighbors: [WeeksAndNeighbors]! @connection(keyName: "byWeek", fields: ["id"])
-	card: S3Object
+  card: S3Object
 }
 
 type S3Object {
