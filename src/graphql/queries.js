@@ -230,6 +230,11 @@ export const getWeek = /* GraphQL */ `
         }
         nextToken
       }
+      card {
+        bucket
+        region
+        key
+      }
     }
   }
 `;
@@ -253,6 +258,11 @@ export const listWeeks = /* GraphQL */ `
         }
         neighbors {
           nextToken
+        }
+        card {
+          bucket
+          region
+          key
         }
       }
       nextToken

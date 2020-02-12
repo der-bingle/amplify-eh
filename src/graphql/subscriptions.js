@@ -504,6 +504,11 @@ export const onCreateWeeksAndNeighbors = /* GraphQL */ `
         neighbors {
           nextToken
         }
+        card {
+          bucket
+          region
+          key
+        }
       }
       neighbor {
         id
@@ -557,6 +562,11 @@ export const onUpdateWeeksAndNeighbors = /* GraphQL */ `
         neighbors {
           nextToken
         }
+        card {
+          bucket
+          region
+          key
+        }
       }
       neighbor {
         id
@@ -609,6 +619,11 @@ export const onDeleteWeeksAndNeighbors = /* GraphQL */ `
         }
         neighbors {
           nextToken
+        }
+        card {
+          bucket
+          region
+          key
         }
       }
       neighbor {
@@ -673,6 +688,11 @@ export const onCreateWeek = /* GraphQL */ `
         }
         nextToken
       }
+      card {
+        bucket
+        region
+        key
+      }
     }
   }
 `;
@@ -706,6 +726,11 @@ export const onUpdateWeek = /* GraphQL */ `
         }
         nextToken
       }
+      card {
+        bucket
+        region
+        key
+      }
     }
   }
 `;
@@ -738,6 +763,11 @@ export const onDeleteWeek = /* GraphQL */ `
           neighborID
         }
         nextToken
+      }
+      card {
+        bucket
+        region
+        key
       }
     }
   }
